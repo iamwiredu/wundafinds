@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Wunda Finds</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #2a152f;
+            color: #f1b7ff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(42, 21, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(241, 183, 255, 0.1);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: #f1b7ff;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            opacity: 1;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            color: #f1b7ff;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            position: relative;
+            font-size: 18px;
+        }
+
+        .icon-btn:hover {
+            background: rgba(241, 183, 255, 0.1);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f1b7ff;
+            color: #2a152f;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Starry Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 24px;
+            height: 18px;
+            opacity: 0.4;
+            animation: twinkle 4s infinite;
+            transition: opacity 0.3s ease;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            25% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            75% {
+                opacity: 0.6;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 0;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(241, 183, 255, 0.1), rgba(216, 167, 255, 0.05));
+            border-radius: 30px;
+            margin-bottom: 80px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(241, 183, 255, 0.1);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Story Section */
+        .story-section {
+            padding: 80px 0;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .story-content h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #f1b7ff;
+        }
+
+        .story-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .story-image {
+            background: linear-gradient(135deg, rgba(241, 183, 255, 0.2), rgba(216, 167, 255, 0.1));
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 1px solid rgba(241, 183, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 50%;
+            padding-right: 40px;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 50%;
+            padding-left: 40px;
+        }
+
+        .timeline-content {
+            background: rgba(241, 183, 255, 0.1);
+            border: 1px solid rgba(241, 183, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f1b7ff;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 4px solid #2a152f;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 80px 0;
+            margin-bottom: 80px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .value-card {
+            background: rgba(241, 183, 255, 0.1);
+            border: 1px solid rgba(241, 183, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card:hover {
+            background: rgba(241, 183, 255, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(241, 183, 255, 0.2);
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+            color: #2a152f;
+        }
+
+        .value-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #f1b7ff;
+        }
+
+        .value-card p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 0;
+            margin-bottom: 80px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .team-card {
+            background: rgba(241, 183, 255, 0.1);
+            border: 1px solid rgba(241, 183, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            background: rgba(241, 183, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 3rem;
+            color: #2a152f;
+            border: 4px solid rgba(241, 183, 255, 0.3);
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #f1b7ff;
+        }
+
+        .team-role {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            color: #d8a7ff;
+        }
+
+        .team-bio {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 35px;
+            height: 35px;
+            background: rgba(241, 183, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f1b7ff;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            color: #2a152f;
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            margin-bottom: 80px;
+            background: rgba(241, 183, 255, 0.05);
+            border-radius: 30px;
+            border: 1px solid rgba(241, 183, 255, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(241, 183, 255, 0.1), rgba(216, 167, 255, 0.05));
+            border-radius: 30px;
+            margin-bottom: 80px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(241, 183, 255, 0.1);
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            color: #2a152f;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(241, 183, 255, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #f1b7ff;
+            border: 2px solid rgba(241, 183, 255, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: rgba(241, 183, 255, 0.1);
+            border-color: #f1b7ff;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .story-image {
+                height: 250px;
+                font-size: 2.5rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 50px;
+                margin-right: 0;
+                padding-left: 30px;
+                padding-right: 20px;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .team-grid,
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Starry Background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <div>
+                    <img src="/placeholder.svg?height=40&width=120" alt="Wunda Finds" class="logo">
+                </div>
+
+                <div class="nav-links">
+                    <a href="home.html">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="about.html" class="active">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="icon-btn">🔍</button>
+                    <button class="icon-btn">👤</button>
+                    <button class="icon-btn">
+                        🛒
+                        <span class="cart-badge">0</span>
+                    </button>
+                    <button class="icon-btn">☰</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section fade-in">
+                <h1 class="hero-title">About Wunda Finds</h1>
+                <p class="hero-subtitle">Discovering cosmic treasures for earthly souls since 2024</p>
+                <p class="hero-description">
+                    We're more than just an online store – we're curators of wonder, collectors of the extraordinary,
+                    and believers in the magic that exists in everyday objects when they find their perfect home.
+                </p>
+            </section>
+
+            <!-- Story Section -->
+            <section class="story-section">
+                <h2 class="section-title fade-in">Our Story</h2>
+
+                <div class="story-grid fade-in">
+                    <div class="story-content">
+                        <h3>Born from Wonder</h3>
+                        <p>
+                            Wundafinds is your go-to shop for affordable aesthetic finds, carefully handpicked to add style to your everyday life.
+                            From cute phone cases and hand fans to popular Stanley cups, lip care, and cosmetics, we bring you trendy essentials at
+                            budget-friendly prices. Proudly Ghanaian, we’re all about beauty, charm, and self-expression. ✨
+                        </p>
+                       
+                    </div>
+                    <div class="story-image">
+                        🌟
+                    </div>
+                </div>
+
+                <div class="story-grid fade-in">
+                    <div class="story-image">
+                        🚀
+                    </div>
+                    <div class="story-content">
+                        <h3>Growing Beyond Earth</h3>
+                        <p>
+                            What started as a small collection of handpicked items has grown into a cosmic marketplace
+                            where creativity meets quality. We've traveled to the far corners of the universe (and the
+                            internet)
+                            to bring you products that you won't find anywhere else.
+                        </p>
+                        <p>
+                            Today, we're proud to serve thousands of customers worldwide, each one part of our growing
+                            community of wonder-seekers and treasure hunters. But our core mission remains the same:
+                            to help you discover your perfect find.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+  
+            <!-- Values Section -->
+            <section class="values-section">
+                <h2 class="section-title fade-in">Our Values</h2>
+                <div class="values-grid">
+                    <div class="value-card fade-in">
+                        <div class="value-icon">✨</div>
+                        <h3>Quality First</h3>
+                        <p>
+                            Every product is carefully vetted for quality, durability, and uniqueness. We believe in
+                            offering
+                            items that will bring joy for years to come, not just moments.
+                        </p>
+                    </div>
+
+                    <div class="value-card fade-in">
+                        <div class="value-icon">🌍</div>
+                        <h3>Sustainability</h3>
+                        <p>
+                            We're committed to responsible sourcing and sustainable practices. Our packaging is
+                            eco-friendly,
+                            and we partner with suppliers who share our environmental values.
+                        </p>
+                    </div>
+
+                    <div class="value-card fade-in">
+                        <div class="value-icon">💜</div>
+                        <h3>Customer Love</h3>
+                        <p>
+                            Our customers are at the heart of everything we do. From our curated selection to our
+                            customer
+                            service, every decision is made with your satisfaction in mind.
+                        </p>
+                    </div>
+
+                    <div class="value-card fade-in">
+                        <div class="value-icon">🔮</div>
+                        <h3>Innovation</h3>
+                        <p>
+                            We're always looking for the next big thing, the hidden gem, the product that will make you
+                            say "wow."
+                            Innovation drives our product discovery process.
+                        </p>
+                    </div>
+
+                    <div class="value-card fade-in">
+                        <div class="value-icon">🤝</div>
+                        <h3>Community</h3>
+                        <p>
+                            We're building more than a business – we're creating a community of like-minded individuals
+                            who
+                            appreciate the extraordinary in the everyday.
+                        </p>
+                    </div>
+
+                    <div class="value-card fade-in">
+                        <div class="value-icon">🎯</div>
+                        <h3>Authenticity</h3>
+                        <p>
+                            We believe in being genuine in everything we do. From our product descriptions to our
+                            customer
+                            interactions, authenticity is our guiding principle.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+  
+            <!-- CTA Section -->
+            <section class="cta-section fade-in">
+                <h2 class="cta-title">Ready to Discover Your Perfect Find?</h2>
+                <p class="cta-description">
+                    Join thousands of satisfied customers who have discovered their cosmic treasures with us.
+                    Your next favorite thing is just a click away.
+                </p>
+                <div class="cta-buttons">
+                    <a href="store.html" class="btn btn-primary">🛍️ Start Shopping</a>
+                    <a href="contact.html" class="btn btn-outline">📧 Get in Touch</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Generate animated bow ribbons with better spacing
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfRibbons = 80; // Reduced number for better spacing
+
+            // Clear any existing stars
+            starsContainer.innerHTML = '';
+
+            // Create a grid-based system to ensure better distribution
+            const gridCols = 10;
+            const gridRows = 8;
+            const cellWidth = 100 / gridCols;
+            const cellHeight = 100 / gridRows;
+
+            // Create array to track used positions
+            const usedPositions = new Set();
+
+            for (let i = 0; i < numberOfRibbons; i++) {
+                const ribbon = document.createElement('div');
+                ribbon.className = 'star';
+
+                // Use grid-based positioning with some randomness
+                let gridX, gridY, positionKey;
+                let attempts = 0;
+
+                do {
+                    gridX = Math.floor(Math.random() * gridCols);
+                    gridY = Math.floor(Math.random() * gridRows);
+                    positionKey = `${gridX}-${gridY}`;
+                    attempts++;
+                } while (usedPositions.has(positionKey) && attempts < 50);
+
+                // If we couldn't find an unused grid position, use random positioning
+                if (attempts >= 50) {
+                    ribbon.style.left = Math.random() * 100 + '%';
+                    ribbon.style.top = Math.random() * 100 + '%';
+                } else {
+                    usedPositions.add(positionKey);
+                    // Add some randomness within the grid cell
+                    const randomOffsetX = (Math.random() - 0.5) * cellWidth * 0.8;
+                    const randomOffsetY = (Math.random() - 0.5) * cellHeight * 0.8;
+
+                    ribbon.style.left = (gridX * cellWidth + cellWidth / 2 + randomOffsetX) + '%';
+                    ribbon.style.top = (gridY * cellHeight + cellHeight / 2 + randomOffsetY) + '%';
+                }
+
+                // Random animation properties for varied blinking
+                ribbon.style.animationDelay = Math.random() * 4 + 's';
+                ribbon.style.animationDuration = (3 + Math.random() * 2) + 's';
+                ribbon.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.8 + Math.random() * 0.4})`;
+
+                // Create the bow ribbon SVG
+                const ribbonSVG = `
+         <svg fill="#f1b7ff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 579.462 579.461" xml:space="preserve" stroke="#f1b7ff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M365.7,267.032c-3.926,4.44-9.648,7.259-16.025,7.259H231.853c-6.074,0-11.551-2.552-15.453-6.625 c-36.218,54.921-159.23,144.453-159.23,144.453h76.5v84.661c94.379-45.211,137.706-116.714,157.59-171.507 c19.884,54.789,63.21,126.296,157.59,171.507v-84.661h76.5C525.35,412.119,401.389,321.898,365.7,267.032z"></path> <path d="M9.819,265.422c10.129,8.703,27.023,13.048,50.576,13.048c35.343,0,85.151-15.637,150.041-35.333v-90.017 C194.071,134.632,99.214,35.876,0.098,109.749V244.89C-0.074,246.083-1.044,256.092,9.819,265.422z M14.617,233.899 c24.801-17.488,82.036-42.62,176.556-1.766C19.149,295.49,13.684,245.79,14.617,233.899z"></path> <path d="M579.361,109.749c-95.542-71.206-187.131,17.989-208.267,41.074v92.941c63.871,19.4,113.006,34.703,147.973,34.706 c23.55,0,40.444-4.345,50.575-13.048c10.86-9.33,9.894-19.339,9.722-20.529V109.749H579.361z M388.286,232.133 c94.521-40.854,151.754-15.723,176.556,1.766C565.775,245.79,560.31,295.49,388.286,232.133z"></path> <path d="M349.675,258.991c3.382,0,6.12-2.739,6.12-6.12v-9.896V135.048c0-3.381-2.738-6.12-6.12-6.12H231.853 c-3.381,0-6.12,2.739-6.12,6.12v112.923v4.899c0,3.381,2.739,6.12,6.12,6.12H349.675z"></path> </g> </g> </g></svg>
+        `;
+
+                ribbon.innerHTML = ribbonSVG;
+                starsContainer.appendChild(ribbon);
+            }
+        }
+
+        // Scroll animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            createStars();
+            initScrollAnimations();
+        });
+    </script>
+</body>
+
+</html>

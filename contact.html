@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Wunda Finds</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #2a152f;
+            color: #f1b7ff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(42, 21, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(241, 183, 255, 0.1);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: #f1b7ff;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            opacity: 1;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            color: #f1b7ff;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            position: relative;
+            font-size: 18px;
+        }
+
+        .icon-btn:hover {
+            background: rgba(241, 183, 255, 0.1);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f1b7ff;
+            color: #2a152f;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Starry Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 24px;
+            height: 18px;
+            opacity: 0.4;
+            animation: twinkle 4s infinite;
+            transition: opacity 0.3s ease;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            25% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            75% {
+                opacity: 0.6;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 60px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Contact Methods */
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .contact-card {
+            background: rgba(241, 183, 255, 0.1);
+            border: 1px solid rgba(241, 183, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card:hover {
+            background: rgba(241, 183, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(241, 183, 255, 0.2);
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: #2a152f;
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #f1b7ff;
+        }
+
+        .contact-card p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f1b7ff;
+            margin-bottom: 15px;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 10px 25px;
+            background: rgba(241, 183, 255, 0.2);
+            border: 1px solid rgba(241, 183, 255, 0.3);
+            border-radius: 25px;
+            color: #f1b7ff;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .contact-link:hover {
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            color: #2a152f;
+            transform: translateY(-2px);
+        }
+
+        /* Contact Form Section */
+        .contact-form-section {
+            background: rgba(241, 183, 255, 0.05);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin-bottom: 60px;
+            border: 1px solid rgba(241, 183, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #f1b7ff;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(241, 183, 255, 0.2);
+            border-radius: 12px;
+            background: rgba(241, 183, 255, 0.1);
+            color: #f1b7ff;
+            font-size: 16px;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #f1b7ff;
+            background: rgba(241, 183, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(241, 183, 255, 0.1);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: rgba(241, 183, 255, 0.6);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-select {
+            cursor: pointer;
+        }
+
+        .form-select option {
+            background: #2a152f;
+            color: #f1b7ff;
+        }
+
+        .priority-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .priority-option {
+            flex: 1;
+        }
+
+        .priority-radio {
+            display: none;
+        }
+
+        .priority-label {
+            display: block;
+            padding: 12px 20px;
+            border: 2px solid rgba(241, 183, 255, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(241, 183, 255, 0.05);
+        }
+
+        .priority-radio:checked+.priority-label {
+            border-color: #f1b7ff;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            color: #2a152f;
+            font-weight: bold;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            color: #2a152f;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(241, 183, 255, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 60px;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #f1b7ff, #d8a7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(241, 183, 255, 0.1);
+            border: 1px solid rgba(241, 183, 255, 0.2);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px 25px;
+            background: none;
+            border: none;
+            color: #f1b7ff;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(241, 183, 255, 0.05);
+        }
+
+        .faq-icon {
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer-content {
+            padding: 0 25px 20px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            z-index: 200;
+        }
+
+        .success-message.show {
+            transform: translateX(0);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .contact-form-section {
+                padding: 40px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .priority-options {
+                flex-direction: column;
+            }
+
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .contact-card {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(42, 21, 47, 0.3);
+            border-radius: 50%;
+            border-top-color: #2a152f;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Starry Background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <div>
+                    <img src="/placeholder.svg?height=40&width=120" alt="Wunda Finds" class="logo">
+                </div>
+
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="store.html">Shop</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html" class="active">Contact</a>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="icon-btn">🔍</button>
+                    <button class="icon-btn">👤</button>
+                    <button class="icon-btn">
+                        🛒
+                        <span class="cart-badge">0</span>
+                    </button>
+                    <button class="icon-btn">☰</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Contact Us</h1>
+                <p class="page-subtitle">
+                    We're here to help you on your cosmic journey. Reach out to us through any of the channels below,
+                    and we'll get back to you faster than light speed! ✨
+                </p>
+            </div>
+
+            <!-- Contact Methods -->
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email Support</h3>
+                    <p>Send us a detailed message and we'll respond within 24 hours</p>
+                    <div class="contact-info">hello@wundafinds.com</div>
+                    <a href="mailto:hello@wundafinds.com" class="contact-link">Send Email</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <h3>Live Chat</h3>
+                    <p>Chat with our cosmic support team in real-time</p>
+                    <div class="contact-info">Available 9 AM - 6 PM GMT</div>
+                    <a href="#" class="contact-link" onclick="startLiveChat()">Start Chat</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>WhatsApp</h3>
+                    <p>Quick questions? Message us on WhatsApp for instant support</p>
+                    <div class="contact-info">+233 XX XXX XXXX</div>
+                    <a href="https://wa.me/233XXXXXXXXX" class="contact-link" target="_blank">Message Us</a>
+                </div>
+
+
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-section">
+                <div class="form-header">
+                    <h2 class="form-title">Send Us a Message</h2>
+                    <p class="form-subtitle">Fill out the form below and we'll get back to you as soon as possible</p>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" class="form-input"
+                                placeholder="Your first name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" class="form-input"
+                                placeholder="Your last name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-input"
+                                placeholder="your.email@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+233 XX XXX XXXX">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="subject" class="form-label">Subject *</label>
+                            <select id="subject" name="subject" class="form-select" required>
+                                <option value="">Select a subject</option>
+                                <option value="order">Order Inquiry</option>
+                                <option value="product">Product Question</option>
+                                <option value="shipping">Shipping & Delivery</option>
+                                <option value="return">Returns & Exchanges</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="partnership">Partnership Inquiry</option>
+                                <option value="feedback">Feedback & Suggestions</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Priority Level</label>
+                            <div class="priority-options">
+                                <div class="priority-option">
+                                    <input type="radio" id="low" name="priority" value="low" class="priority-radio"
+                                        checked>
+                                    <label for="low" class="priority-label">🟢 Low</label>
+                                </div>
+                                <div class="priority-option">
+                                    <input type="radio" id="medium" name="priority" value="medium"
+                                        class="priority-radio">
+                                    <label for="medium" class="priority-label">🟡 Medium</label>
+                                </div>
+                                <div class="priority-option">
+                                    <input type="radio" id="high" name="priority" value="high" class="priority-radio">
+                                    <label for="high" class="priority-label">🔴 High</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="message" name="message" class="form-textarea"
+                                placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span id="submitText">🚀 Send Message</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <div class="faq-header">
+                    <h2 class="faq-title">Frequently Asked Questions</h2>
+                    <p>Quick answers to common questions about Wunda Finds</p>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How long does shipping take?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Answer will go here
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What is your return policy?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Answer will go here
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Do you offer international shipping?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Answer will go here
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How can I track my order?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Answer will go here
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What payment methods do you accept?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Answer will go here
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <strong>✨ Message sent successfully!</strong><br>
+        We'll get back to you within 24 hours.
+    </div>
+
+    <script>
+        // Generate animated bow ribbons with better spacing
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfRibbons = 80; // Reduced number for better spacing
+
+            // Clear any existing stars
+            starsContainer.innerHTML = '';
+
+            // Create a grid-based system to ensure better distribution
+            const gridCols = 10;
+            const gridRows = 8;
+            const cellWidth = 100 / gridCols;
+            const cellHeight = 100 / gridRows;
+
+            // Create array to track used positions
+            const usedPositions = new Set();
+
+            for (let i = 0; i < numberOfRibbons; i++) {
+                const ribbon = document.createElement('div');
+                ribbon.className = 'star';
+
+                // Use grid-based positioning with some randomness
+                let gridX, gridY, positionKey;
+                let attempts = 0;
+
+                do {
+                    gridX = Math.floor(Math.random() * gridCols);
+                    gridY = Math.floor(Math.random() * gridRows);
+                    positionKey = `${gridX}-${gridY}`;
+                    attempts++;
+                } while (usedPositions.has(positionKey) && attempts < 50);
+
+                // If we couldn't find an unused grid position, use random positioning
+                if (attempts >= 50) {
+                    ribbon.style.left = Math.random() * 100 + '%';
+                    ribbon.style.top = Math.random() * 100 + '%';
+                } else {
+                    usedPositions.add(positionKey);
+                    // Add some randomness within the grid cell
+                    const randomOffsetX = (Math.random() - 0.5) * cellWidth * 0.8;
+                    const randomOffsetY = (Math.random() - 0.5) * cellHeight * 0.8;
+
+                    ribbon.style.left = (gridX * cellWidth + cellWidth / 2 + randomOffsetX) + '%';
+                    ribbon.style.top = (gridY * cellHeight + cellHeight / 2 + randomOffsetY) + '%';
+                }
+
+                // Random animation properties for varied blinking
+                ribbon.style.animationDelay = Math.random() * 4 + 's';
+                ribbon.style.animationDuration = (3 + Math.random() * 2) + 's';
+                ribbon.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.8 + Math.random() * 0.4})`;
+
+                // Create the bow ribbon SVG
+                const ribbonSVG = `
+         <svg fill="#f1b7ff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 579.462 579.461" xml:space="preserve" stroke="#f1b7ff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M365.7,267.032c-3.926,4.44-9.648,7.259-16.025,7.259H231.853c-6.074,0-11.551-2.552-15.453-6.625 c-36.218,54.921-159.23,144.453-159.23,144.453h76.5v84.661c94.379-45.211,137.706-116.714,157.59-171.507 c19.884,54.789,63.21,126.296,157.59,171.507v-84.661h76.5C525.35,412.119,401.389,321.898,365.7,267.032z"></path> <path d="M9.819,265.422c10.129,8.703,27.023,13.048,50.576,13.048c35.343,0,85.151-15.637,150.041-35.333v-90.017 C194.071,134.632,99.214,35.876,0.098,109.749V244.89C-0.074,246.083-1.044,256.092,9.819,265.422z M14.617,233.899 c24.801-17.488,82.036-42.62,176.556-1.766C19.149,295.49,13.684,245.79,14.617,233.899z"></path> <path d="M579.361,109.749c-95.542-71.206-187.131,17.989-208.267,41.074v92.941c63.871,19.4,113.006,34.703,147.973,34.70\`\`\`xml
+3 c23.55,0,40.444-4.345,50.575-13.048c10.86-9.33,9.894-19.339,9.722-20.529V109.749H579.361z M388.286,232.133 c94.521-40.854,151.754-15.723,176.556,1.766C565.775,245.79,560.31,295.49,388.286,232.133z"></path> <path d="M349.675,258.991c3.382,0,6.12-2.739,6.12-6.12v-9.896V135.048c0-3.381-2.738-6.12-6.12-6.12H231.853 c-3.381,0-6.12,2.739-6.12,6.12v112.923v4.899c0,3.381,2.739,6.12,6.12,6.12H349.675z"></path> </g> </g> </g></svg>
+        `;
+
+                ribbon.innerHTML = ribbonSVG;
+                starsContainer.appendChild(ribbon);
+            }
+        }
+
+        // FAQ functionality
+        function initFAQ() {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+
+                    // Close all FAQ items
+                    faqItems.forEach(faq => faq.classList.remove('active'));
+
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Contact form functionality
+        function initContactForm() {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const successMessage = document.getElementById('successMessage');
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                // Disable submit button and show loading
+                submitBtn.disabled = true;
+                submitText.innerHTML = '<span class="loading"></span> Sending...';
+
+                // Simulate form submission (replace with actual API call)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Show success message
+                successMessage.classList.add('show');
+
+                // Reset form
+                form.reset();
+
+                // Reset submit button
+                submitBtn.disabled = false;
+                submitText.innerHTML = '🚀 Send Message';
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+            });
+        }
+
+        // Live chat functionality
+        function startLiveChat() {
+            alert('Live chat would be integrated here with a service like Intercom, Zendesk, or Crisp!');
+            // In a real implementation, you would initialize your chat widget here
+        }
+
+        // Map functionality
+        function openMap() {
+            // Replace with actual coordinates
+            const address = encodeURIComponent('123 Cosmic Avenue, Accra, Ghana');
+            window.open(`https://www.google.com/maps/search/?api=1&query=${address}`, '_blank');
+        }
+
+        // Form validation enhancements
+        function initFormValidation() {
+            const inputs = document.querySelectorAll('.form-input, .form-textarea, .form-select');
+
+            inputs.forEach(input => {
+                input.addEventListener('blur', function () {
+                    validateField(this);
+                });
+
+                input.addEventListener('input', function () {
+                    if (this.classList.contains('error')) {
+                        validateField(this);
+                    }
+                });
+            });
+        }
+
+        function validateField(field) {
+            const value = field.value.trim();
+            let isValid = true;
+
+            // Remove existing error styling
+            field.classList.remove('error');
+
+            // Check if required field is empty
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+            }
+
+            // Email validation
+            if (field.type === 'email' && value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    isValid = false;
+                }
+            }
+
+            // Phone validation (basic)
+            if (field.type === 'tel' && value) {
+                const phoneRegex = /^[\+]?[0-9\s\-$$$$]{10,}$/;
+                if (!phoneRegex.test(value)) {
+                    isValid = false;
+                }
+            }
+
+            if (!isValid) {
+                field.classList.add('error');
+                field.style.borderColor = '#ff6b6b';
+            } else {
+                field.style.borderColor = '';
+            }
+
+            return isValid;
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            createStars();
+            initFAQ();
+            initContactForm();
+            initFormValidation();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
